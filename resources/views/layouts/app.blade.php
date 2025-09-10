@@ -39,20 +39,22 @@
 					</li>
 				</ul>
 			</div>
-			<div class="d-flex">
-				<ul class="navbar-nav">
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-							{{ Auth()::user->name }}
-						</a>
-						<ul class="dropdown-menu">
-							<li><a class="dropdown-item" href="#">Profile</a></li>
-							<li><a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();getElementById('log-out-form').submit();">Log-out</a></li>
-							<form action="{{ route('logout') }}" method="POST" class="d-none">@csrf @method('POST')</form>
-						</ul>
-					</li>
-				</ul>
-			</div>
+			@auth
+				<div class="d-flex">
+					<ul class="navbar-nav">
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+								{{ Auth::user()->name }}
+							</a>
+							<ul class="dropdown-menu">
+								<li><a class="dropdown-item" href="#">Profile</a></li>
+								<li><a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();getElementById('log-out-form').submit();">Log-out</a></li>
+								<form action="{{ route('logout') }}" method="POST" class="d-none" id="log-out-form">@csrf @method('POST')</form>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			@endauth
 		</div>
 	</nav>
 	@yield('content')
