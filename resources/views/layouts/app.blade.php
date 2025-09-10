@@ -28,10 +28,10 @@
 					</li>
 					@guest
 						<li class="nav-item">
-							<a class="nav-link @if (request()->is('login')) active @endif">Login</a>
+							<a href="{{ route('login') }}" class="nav-link @if (request()->is('login')) active @endif">Login</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link @if (request()->is('register')) active @endif">Register</a>
+							<a href="{{ route('register') }}" class="nav-link @if (request()->is('register')) active @endif">Register</a>
 						</li>
 					@endguest
 					<li class="nav-item">
