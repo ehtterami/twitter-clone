@@ -9,7 +9,7 @@ class ExploreController extends Controller
 {
     public function index()
     {
-        $posts = Post::latest('created_at')->pagination(10);
+        $posts = Post::latest('created_at')->paginate(10);
         return view('explore.index', compact('posts'));
     }
 }
