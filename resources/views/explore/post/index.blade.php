@@ -32,6 +32,14 @@
 		</div>
 
 		<h3 class="fs-4 fw-light mt-5 mb-3">Comments</h3>
+		<form action="{{ route('explore.comment', $post) }}" method="POST">
+			@csrf
+			@method('POST')
+			<textarea class="form-control @error('body') is-invalid @enderror" id="postBody" rows="1" name="body" placeholder="I think..."></textarea>
+			<div class="d-grid gap-0 mt-3">
+				<button type="submit" class="btn btn-primary btn-block">Comment</button>
+			</div>
+		</form>
 		@forelse ($post->comments()->get() as $comment)
 			<div class="card mt-2">
 				<div class="card-header">{{ $comment->user->name }}</div>

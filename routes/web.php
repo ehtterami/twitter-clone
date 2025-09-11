@@ -10,6 +10,7 @@ Route::name('explore.')->group(function() {
     Route::post('like/{post}', [ExploreController::class, 'likePost'])->name('likePost');
     Route::post('dis-like/{post}', [ExploreController::class, 'disLikePost'])->name('disLikePost');
     Route::get('{post}', [ExploreController::class, 'open'])->name('open');
+    Route::post('comment-on/{post}', [PostController::class, 'comment'])->name('comment')->middleware(['web', 'auth']);
 });
 
 Route::prefix('profile')->name('profile.')->group(function() {
