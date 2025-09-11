@@ -3,13 +3,37 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ExploreController extends Controller
 {
     public function index()
     {
+        $user = Auth::user();
         $posts = Post::latest('created_at')->paginate(10);
-        return view('explore.index', compact('posts'));
+        return view('explore.index', compact('posts', 'user'));
+    }
+
+    public function likePost(Post $post): RedirectResponse
+    {
+        Auth::user()->likes()->create([
+            'post_id' => $post->id
+        ]);
+
+        return back();
+    }
+
+    public function disLikePost(Post $post): RedirectResponse
+    {
+        $user = Auth::user();
+        $userLiked = $user->likes()->where('post_id', $post->id);
+
+        if ($userLiked) {
+            $user->likes()->where('post_id', $post->id)->delete();
+        }
+
+        return back();
     }
 }
