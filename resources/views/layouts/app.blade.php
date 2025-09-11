@@ -12,7 +12,7 @@
 	<nav class="navbar navbar-expand-lg bg-body-tertiary">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="{{ route('explore.index') }}">
-				<img src="{{ asset('favicon.ico') }}" width="30" height="24" class="d-inline-block align-text-top">
+				<img src="{{ asset('icon.svg') }}" width="30" height="24" class="d-inline-block align-text-top">
 				{{ config('app.name') }}
 			</a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#appNav" aria-controls="appNav" aria-expanded="false" aria-label="Toggle navigation">
