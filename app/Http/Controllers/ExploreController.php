@@ -36,4 +36,10 @@ class ExploreController extends Controller
 
         return back();
     }
+
+    public function open(Post $post)
+    {
+        $user = Auth::user();
+        return view('explore.post.index', compact('post', 'user'));
+    }
 }
