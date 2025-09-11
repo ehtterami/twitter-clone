@@ -12,7 +12,7 @@
 	<nav class="navbar navbar-expand-lg bg-body-tertiary">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="{{ route('explore.index') }}">
-				<img src="{{ asset('favicon.ico') }}" width="30" height="24" class="d-inline-block align-text-top">
+				<img src="{{ asset('icon.svg') }}" width="30" height="24" class="d-inline-block align-text-top">
 				{{ config('app.name') }}
 			</a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#appNav" aria-controls="appNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,7 +47,7 @@
 								{{ Auth::user()->name }}
 							</a>
 							<ul class="dropdown-menu">
-								<li><a class="dropdown-item" href="#">Profile</a></li>
+								<li><a class="dropdown-item" href="{{ route('profile.profile') }}">Profile</a></li>
 								<li><a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();getElementById('log-out-form').submit();">Log-out</a></li>
 								<form action="{{ route('logout') }}" method="POST" class="d-none" id="log-out-form">@csrf @method('POST')</form>
 							</ul>

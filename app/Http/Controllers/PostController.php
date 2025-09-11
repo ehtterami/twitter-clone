@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,5 +29,19 @@ class PostController extends Controller
         $message = "Something went wrong";
 
         return redirect()->route('explore.index')->with('message', $message);
+    }
+
+    public function comment(Request $request, Post $post): RedirectResponse
+    {
+        $validated = $request->validate([
+            'body' => ['required', 'max:100', 'string']
+        ]);
+
+        Auth::user()->comments()->create([
+            'body' => $validated['body'],
+            'post_id' => $post->id
+        ]);
+
+        return back();
     }
 }
