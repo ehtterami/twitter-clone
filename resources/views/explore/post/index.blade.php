@@ -8,7 +8,7 @@
 			<div class="card-header">
 				<p class="fw-bold text-secondary fs-6 text-decoration-underline">{{ $post->user->name }}</p>
 			</div>
-			<div class="card-body">
+			<div class="card- p-3">
 				<small class="text-muted fw-lighter">Created At: {{ $post->created_at->format('d/m/y') }}</small>
 				<p class="fs-5 fw-light text-secondary text-right p-3">{{ $post->body }}</p>
 				<div class="mt-2">
@@ -30,5 +30,19 @@
 				</div>
 			</div>
 		</div>
+
+		<h3 class="fs-4 fw-light mt-5 mb-3">Comments</h3>
+		@forelse ($post->comments()->get() as $comment)
+			<div class="card mt-2">
+				<div class="card-header">{{ $comment->user->name }}</div>
+				<div class="card-body p-2">
+					{{ $comment->body }}
+				</div>
+			</div>
+		@empty
+			<div class="alert alert-dark text-light" role="alert">
+				There is no comments yet!
+			</div>
+		@endforelse
 	</div>
 @endsection
