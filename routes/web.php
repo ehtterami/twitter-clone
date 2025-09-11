@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ExploreController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::name('explore.')->group(function() {
@@ -12,6 +13,8 @@ Route::name('explore.')->group(function() {
 });
 
 Route::prefix('profile')->name('profile.')->group(function() {
+    Route::get('/details', [ProfileController::class, 'index'])->name('profile');
     Route::get('new', [PostController::class, 'create'])->name('post.create');
     Route::post('new/write', [PostController::class, 'store'])->name('post.store');
-});
+    Route::get('liked', [ProfileController::class, 'liked'])->name('liked');
+})->middleware(['web', 'auth']);
