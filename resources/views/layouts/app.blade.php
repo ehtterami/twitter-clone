@@ -21,6 +21,9 @@
 			<div class="collapse navbar-collapse" id="appNav">
 				<ul class="navbar-nav">
 					<li class="nav-item">
+						<a class="nav-link @if (request()->is('home.index')) active @endif" href="{{ route('home.index') }}">Home</a>
+					</li>
+					<li class="nav-item">
 						<a class="nav-link @if (request()->is('explore.index')) active @endif" href="{{ route('explore.index') }}">Explore</a>
 					</li>
 					<li class="nav-item">

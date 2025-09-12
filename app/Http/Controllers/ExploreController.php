@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -41,5 +42,19 @@ class ExploreController extends Controller
     {
         $user = Auth::user();
         return view('explore.post.index', compact('post', 'user'));
+    }
+
+    public function follow(User $user)
+    {
+        $authUser = Auth::user();
+        $authUser->followings()->attach($user->id);
+        return back();
+    }
+
+    public function unfollow(User $user)
+    {
+        $authUser = Auth::user();
+        $authUser->followings()->detach($user->id);
+        return back();
     }
 }

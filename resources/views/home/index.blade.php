@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Explore')
+@section('title', 'Home')
 
 @section('content')
 	<div class="container">
@@ -8,21 +8,6 @@
 			<div class="card mt-3">
 				<div class="card-header">
 					<p class="fw-bold text-secondary fs-6 text-decoration-underline">{{ $post->user->name }}</p>
-					@auth
-						@if (!$user->followings()->where('followed_id', $post->user_id)->exists())
-							<form action="{{ route('explore.follow', $post->user->id) }}" method="POST">
-								@csrf
-								@method('POST')
-								<button type="submit" class="btn btn-sm btn-outline-dark">Follow</button>
-							</form>
-						@else
-							<form action="{{ route('explore.unfollow', $post->user->id) }}" method="POST">
-								@csrf
-								@method('POST')
-								<button type="submit" class="btn btn-sm btn-danger">Unfollow</button>
-							</form>
-						@endif
-					@endauth
 				</div>
 				<div class="card-body">
 					<p class="fs-5 fw-light text-secondary text-right p-3">{{ $post->body }}</p>
@@ -50,10 +35,8 @@
 				</div>
 			</div>
 		@empty
-			<div class="card">
-				<div class="card-body">
-					<p class="text-secondary">No Content Available Yet!</p>
-				</div>
+			<div class="alert alert-dark mt-5" role="alert">
+				There is no posts yet, follow people to find what their think!
 			</div>
 		@endforelse
 

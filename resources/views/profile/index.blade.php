@@ -4,14 +4,7 @@
 
 @section('content')
 	<div class="container mt-3">
-		<ul class="nav nav-tabs">
-			<li class="nav-item">
-				<a class="nav-link @if(request()->is('profile.profile')) active @endif" aria-current="page" href="{{ route('profile.profile') }}">Details</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link @if(request()->is('profile.liked')) active @endif" href="{{ route('profile.liked') }}">Liked</a>
-			</li>
-		</ul>
+		<x-profile.navbar />
 
 		<form class="card mt-3 p-5">
 			<fieldset disabled>

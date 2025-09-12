@@ -18,4 +18,17 @@ class ProfileController extends Controller
         $likedPosts = Auth::user()->likes()->get();
         return view('profile.liked', compact('likedPosts'));
     }
+
+    public function followings()
+    {
+        $followings = Auth::user()->followings()->get();
+        return view('profile.followings', compact('followings'));
+    }
+
+    public function followers()
+    {
+        $followers = Auth::user()->followed()->get();
+        $auth = Auth::user();
+        return view('profile.followers', compact('followers', 'auth'));
+    }
 }
