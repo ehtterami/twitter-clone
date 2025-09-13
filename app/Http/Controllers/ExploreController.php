@@ -57,4 +57,14 @@ class ExploreController extends Controller
         $authUser->followings()->detach($user->id);
         return back();
     }
+
+    public function profile(Request $request)
+    {
+        $user = Auth::user();
+        if($request->query('id')) {
+            $userID = (int) $request->id;
+            $user = User::find($userID);
+        }
+        return view('explore.profile', compact('user'));
+    }
 }

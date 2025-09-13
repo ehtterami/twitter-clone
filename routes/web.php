@@ -8,10 +8,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('home')->name('home.')->group(function() {
     Route::get('/', [HomeController::class, 'index'])->name('index');
-});
+})->middleware(['web', 'auth']);
 
 Route::name('explore.')->group(function() {
     Route::get('/', [ExploreController::class, 'index'])->name('index');
+    Route::get('profile', [ExploreController::class, 'profile'])->name('profile')->middleware(['web', 'auth']);
     Route::post('like/{post}', [ExploreController::class, 'likePost'])->name('likePost');
     Route::post('dis-like/{post}', [ExploreController::class, 'disLikePost'])->name('disLikePost');
     Route::get('{post}', [ExploreController::class, 'open'])->name('open');

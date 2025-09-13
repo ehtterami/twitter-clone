@@ -27,6 +27,9 @@
 						<a class="nav-link @if (request()->is('explore.index')) active @endif" href="{{ route('explore.index') }}">Explore</a>
 					</li>
 					<li class="nav-item">
+						<a class="nav-link @if (request()->is('explore.profile')) active @endif" href="{{ route('explore.profile') }}">Profile</a>
+					</li>
+					<li class="nav-item">
 						<a class="nav-link @if (request()->is('profile.create')) active @endif @guest disabled @endguest" href="{{ route('profile.post.create') }}">Write</a>
 					</li>
 					@guest
@@ -46,7 +49,8 @@
 				<div class="d-flex">
 					<ul class="navbar-nav">
 						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							<a class="nav-link dropdown-toggle d-flex justify-between align-content-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+								<img class="img-thumbnail m-1" width="34" height="34" src="{{ Auth::user()->avatar }}">
 								{{ Auth::user()->name }}
 							</a>
 							<ul class="dropdown-menu">

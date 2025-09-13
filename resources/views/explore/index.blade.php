@@ -7,20 +7,25 @@
 		@forelse($posts as $post)
 			<div class="card mt-3">
 				<div class="card-header">
-					<p class="fw-bold text-secondary fs-6 text-decoration-underline">{{ $post->user->name }}</p>
+					<div class="d-flex align-items-center justify-between"><img class="img-thumbnail" width="34" height="34" src="{{ $post->user->avatar }}"
+							alt="Profile Image of {{ $post->user->name }}">
+						<a href="{{ route('explore.profile', ['id' => $post->user->id]) }}" class="fw-bold text-secondary fs-6 text-decoration-underline">{{ $post->user->name }}</a>
+					</div>
 					@auth
-						@if (!$user->followings()->where('followed_id', $post->user_id)->exists())
-							<form action="{{ route('explore.follow', $post->user->id) }}" method="POST">
-								@csrf
-								@method('POST')
-								<button type="submit" class="btn btn-sm btn-outline-dark">Follow</button>
-							</form>
-						@else
-							<form action="{{ route('explore.unfollow', $post->user->id) }}" method="POST">
-								@csrf
-								@method('POST')
-								<button type="submit" class="btn btn-sm btn-danger">Unfollow</button>
-							</form>
+						@if ($post->user_id !== $user->id)
+							@if (!$user->followings()->where('followed_id', $post->user_id)->exists())
+								<form action="{{ route('explore.follow', $post->user->id) }}" method="POST">
+									@csrf
+									@method('POST')
+									<button type="submit" class="btn btn-sm btn-outline-dark">Follow</button>
+								</form>
+							@else
+								<form action="{{ route('explore.unfollow', $post->user->id) }}" method="POST">
+									@csrf
+									@method('POST')
+									<button type="submit" class="btn btn-sm btn-danger">Unfollow</button>
+								</form>
+							@endif
 						@endif
 					@endauth
 				</div>
