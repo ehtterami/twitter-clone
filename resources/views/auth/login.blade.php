@@ -4,7 +4,7 @@
 
 @section('content')
 	<div class="container">
-		<form action="{{ route('login.store') }}" method="POST" class="card">
+		<form action="{{ route('login.store') }}" method="POST" class="card p-4 mt-5">
 			@csrf
 			@method('POST')
 			<div class="card-body">
@@ -21,7 +21,10 @@
 					<label class="form-check-label" for="remember">Remember Me</label>
 				</div>
 			</div>
-			<button type="submit" class="btn btn-primary">Login</button>
+			<div class="d-flex gap-3">
+				<button type="submit" class="btn btn-primary btn-block">Login</button>
+				<a href="{{ route('oauth.redirect', 'github') }}" class="btn btn-outline-dark btn-block">Login GitHub</a>
+			</div>
 		</form>
 	</div>
 @endsection

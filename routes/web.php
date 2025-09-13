@@ -2,9 +2,15 @@
 
 use App\Http\Controllers\ExploreController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OAuthController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+
+Route::prefix('oauth')->name('oauth.')->middleware(['web'])->group(function() {
+    Route::get('{driver}/redirect', [OAuthController::class, 'redirect'])->name('redirect');
+    Route::get('{driver}/callback', [OAuthController::class, 'callback'])->name('callback');
+});
 
 Route::prefix('home')->name('home.')->group(function() {
     Route::get('/', [HomeController::class, 'index'])->name('index');
